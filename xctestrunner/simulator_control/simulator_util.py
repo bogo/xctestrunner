@@ -461,8 +461,8 @@ def GetSupportedSimOsVersions(os_type=ios_constants.OS.IOS):
   for sim_runtime_info in sim_runtime_infos_json['runtimes']:
     # Normally, the json does not contain unavailable runtimes. To be safe,
     # also checks the 'availability' field.
-    if sim_runtime_info['availability'].find('unavailable') >= 0:
-      continue
+    # if sim_runtime_info['availability'].find('unavailable') >= 0:
+    #  continue
     listed_os_type, listed_os_version = sim_runtime_info['name'].split(' ', 1)
     if listed_os_type == os_type:
       if os_type == ios_constants.OS.IOS:
@@ -659,10 +659,10 @@ def RunSimctlCommand(command):
     process = subprocess.Popen(
         command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
-    if ios_constants.CORESIMULATOR_CHANGE_ERROR in stderr:
+    if ios_constants.CORESIMULATOR_CHANGE_ERROR in stderr.decode('utf8'):
       output = stdout
     else:
-      output = '\n'.join([stdout, stderr])
+      output = '\n'.join([stdout.decode('utf8'), stderr.decode('utf8')])
     output = output.strip()
     if process.poll() != 0:
       if (i < (_SIMCTL_MAX_ATTEMPTS - 1) and

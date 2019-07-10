@@ -1,6 +1,8 @@
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
 # For packaging python scripts.
 git_repository(
     name = "subpar",
     remote = "https://github.com/google/subpar",
-    commit = "edb8409041b521959b6ed4b7412c0eec59d4af78",
+    commit = "35bb9f0092f71ea56b742a520602da9b3638a24f",
 )

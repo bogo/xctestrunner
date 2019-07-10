@@ -49,10 +49,10 @@ class SimTypeProfile(object):
     if not self._profile_plist_obj:
       if xcode_info_util.GetXcodeVersionNumber() >= 900:
         platform_path = xcode_info_util.GetSdkPlatformPath(
-            ios_constants.SDK.IPHONEOS)
+            ios_constants.SDK.IPHONEOS).decode('utf8')
       else:
         platform_path = xcode_info_util.GetSdkPlatformPath(
-            ios_constants.SDK.IPHONESIMULATOR)
+            ios_constants.SDK.IPHONESIMULATOR).decode('uft8')
       profile_plist_path = os.path.join(
           platform_path,
           'Developer/Library/CoreSimulator/Profiles/DeviceTypes/'

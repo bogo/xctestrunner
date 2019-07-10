@@ -166,6 +166,7 @@ class XcodebuildTestExecutor(object):
       check_xcodebuild_stuck.start()
       output = io.BytesIO()
       for stdout_line in iter(process.stdout.readline, ''):
+        stdout_line = stdout_line.decode('utf8')
         if not test_started:
           # Terminates the CheckXcodebuildStuckThread when test has started
           # or XCTRunner.app has started.
@@ -192,7 +193,7 @@ class XcodebuildTestExecutor(object):
         # If return_output is false, the output is only used for checking error
         # cause and deleting cached files (_DeleteTestCacheFileDirs method).
         if return_output or not test_started:
-          output.write(stdout_line)
+          output.write(stdout_line.encode())
 
       try:
         if test_started:

@@ -41,7 +41,7 @@ def GetXcodeVersionNumber():
   # Example output:
   # Xcode 8.2.1
   # Build version 8C1002
-  output = subprocess.check_output(('xcodebuild', '-version'))
+  output = subprocess.check_output(('xcodebuild', '-version')).decode('utf8')
   xcode_version = output.split('\n')[0].split(' ')[1]
   parts = xcode_version.split('.')
   xcode_version_number = int(parts[0]) * 100
